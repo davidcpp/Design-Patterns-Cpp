@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -179,20 +180,18 @@ public:
 
 #pragma endregion
 
+const ToC coffeeTypes[] = { ToC::BEANS, ToC::CHOCOLATE, ToC::DEFAULT, ToC::GROUND, ToC::INSTANT };
+
 int main()
 {
-  unique_ptr<Coffee> defaultCoffee;
-  unique_ptr<Coffee> insCoffee;
-  unique_ptr<Coffee> grCoffee;
-  unique_ptr<Coffee> beansCoffee;
-  unique_ptr<Coffee> chocCoffee;
+  vector<unique_ptr<Coffee>> createdCoffees;
 
   CoffeeManufacturer *lavazzaMan = new LavazzaManufacturer();
-  defaultCoffee = lavazzaMan->createCoffee(ToC::DEFAULT);
-  insCoffee = lavazzaMan->createCoffee(ToC::INSTANT);
-  beansCoffee = lavazzaMan->createCoffee(ToC::BEANS);
-  grCoffee = lavazzaMan->createCoffee(ToC::GROUND);
-  chocCoffee = lavazzaMan->createCoffee(ToC::CHOCOLATE);
+
+  for (auto& x : coffeeTypes )
+  {
+    createdCoffees.emplace_back(lavazzaMan->createCoffee(x));
+  }
 
   cout << '\n';
   system("PAUSE");
