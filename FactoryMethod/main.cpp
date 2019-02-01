@@ -179,8 +179,6 @@ public:
 
 #pragma endregion
 
-using ToC = Coffee::TypeOfCoffee;
-
 int main()
 {
   unique_ptr<Coffee> defaultCoffee;
