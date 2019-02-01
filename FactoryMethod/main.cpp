@@ -47,6 +47,7 @@ class BeansCoffee : public Coffee
 public:
   BeansCoffee()
   {
+    cout << "\nCreate coffee beans\n";
     typeOfCoffee = ToC::BEANS;
     caffeineContent = 0.02;
     makeCoffee();
@@ -64,6 +65,7 @@ class ChocolateCoffee : public Coffee
 public:
   ChocolateCoffee()
   {
+    cout << "\nCreate chocolate coffee\n";
     typeOfCoffee = ToC::CHOCOLATE;
     caffeineContent = 0.01;
     makeCoffee();
@@ -87,6 +89,7 @@ class GroundCoffee : public Coffee
 public:
   GroundCoffee()
   {
+    cout << "\nCreate ground coffee\n";
     typeOfCoffee = ToC::GROUND;
     caffeineContent = 0.02;
     makeCoffee();
@@ -110,6 +113,7 @@ class InsantCoffee : public Coffee
 public:
   InsantCoffee()
   {
+    cout << "\nCreate instant coffee\n";
     typeOfCoffee = ToC::INSTANT;
     caffeineContent = 0.03;
     makeCoffee();
@@ -192,6 +196,7 @@ int main()
   grCoffee = lavazzaMan->createCoffee(ToC::GROUND);
   chocCoffee = lavazzaMan->createCoffee(ToC::CHOCOLATE);
 
+  cout << '\n';
   system("PAUSE");
   return 0;
 }
