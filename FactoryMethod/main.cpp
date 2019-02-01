@@ -49,6 +49,7 @@ public:
   {
     typeOfCoffee = ToC::BEANS;
     caffeineContent = 0.02;
+    makeCoffee();
   }
 
 private:
@@ -88,6 +89,7 @@ public:
   {
     typeOfCoffee = ToC::GROUND;
     caffeineContent = 0.02;
+    makeCoffee();
   }
 
 private:
@@ -110,6 +112,7 @@ public:
   {
     typeOfCoffee = ToC::INSTANT;
     caffeineContent = 0.03;
+    makeCoffee();
   }
 
 private:
