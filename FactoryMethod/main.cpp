@@ -13,9 +13,9 @@ public:
   {
     BEANS,
     CHOCOLATE,
+    DEFAULT,
     GROUND,
     INSTANT,
-    DEFAULT
   };
 
 protected:
