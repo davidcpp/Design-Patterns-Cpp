@@ -35,31 +35,6 @@ private:
   string _software;
 };
 
-class Director
-{
-public:
-  void setBuilder(RobotBuilder * builder)
-  {
-    _builder = builder;
-  }
-
-  void buildRobot()
-  {
-    _builder->setChassis();
-    _builder->setController();
-    _builder->setPowerSupply();
-    _builder->setSoftware();
-  }
-
-  Robot* getResult() const
-  {
-    return _builder->getResult();
-  }
-
-private:
-  RobotBuilder * _builder;
-};
-
 class RobotBuilder
 {
 public:
@@ -96,12 +71,12 @@ public:
     _robot->setChassis("Dagu DG012-SV"s);
   }
 
-  virtual void setController() override 
+  virtual void setController() override
   {
     _robot->setController("Raspberry Pi"s);
   }
 
-  virtual void setPowerSupply() override 
+  virtual void setPowerSupply() override
   {
     _robot->setPowerSupply("Redox Li-Pol 2200mAh 11.1V 30C"s);
   }
@@ -138,6 +113,31 @@ public:
   }
 
 private:
+};
+
+class Director
+{
+public:
+  void setBuilder(RobotBuilder * builder)
+  {
+    _builder = builder;
+  }
+
+  void buildRobot()
+  {
+    _builder->setChassis();
+    _builder->setController();
+    _builder->setPowerSupply();
+    _builder->setSoftware();
+  }
+
+  Robot* getResult() const
+  {
+    return _builder->getResult();
+  }
+
+private:
+  RobotBuilder * _builder;
 };
 
 int main()
