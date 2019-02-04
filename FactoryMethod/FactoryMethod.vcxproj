@@ -115,9 +115,6 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="Coffee.hpp" />
     <ClInclude Include="CoffeeMan.hpp" />
   </ItemGroup>
