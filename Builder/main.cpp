@@ -60,10 +60,10 @@ public:
   }
 
   virtual void createNewRobot() = 0;
-  virtual void setChassis() = 0;
-  virtual void setController() = 0;
-  virtual void setPowerSupply() = 0;
-  virtual void setSoftware() = 0;
+  virtual void buildChassis() = 0;
+  virtual void buildController() = 0;
+  virtual void buildPowerSupply() = 0;
+  virtual void buildSoftware() = 0;
 
   Robot * getResult() const
   {
@@ -82,22 +82,22 @@ public:
     _robot = new Robot("Crawler Robot - Dagu DG012-SV"s);
   }
 
-  virtual void setChassis() override
+  virtual void buildChassis() override
   {
     _robot->setChassis("Dagu DG012-SV"s);
   }
 
-  virtual void setController() override
+  virtual void buildController() override
   {
     _robot->setController("Raspberry Pi"s);
   }
 
-  virtual void setPowerSupply() override
+  virtual void buildPowerSupply() override
   {
     _robot->setPowerSupply("Redox Li-Pol 2200mAh 11.1V 30C"s);
   }
 
-  virtual void setSoftware() override
+  virtual void buildSoftware() override
   {
     _robot->setSoftware("Raspbian"s);
   }
@@ -113,22 +113,22 @@ public:
     _robot = new Robot("Wheeled Robot - Dagu Wild Thumper"s);
   }
 
-  virtual void setChassis() override
+  virtual void buildChassis() override
   {
     _robot->setChassis("Dagu Wild Thumper"s);
   }
 
-  virtual void setController() override
+  virtual void buildController() override
   {
     _robot->setController("STM32 Discovery"s);
   }
 
-  virtual void setPowerSupply() override
+  virtual void buildPowerSupply() override
   {
     _robot->setPowerSupply("Redox Li-Pol 2600mAh 7.4V 20C"s);
   }
 
-  virtual void setSoftware() override
+  virtual void buildSoftware() override
   {
     _robot->setSoftware("Free RTOS"s);
   }
@@ -147,10 +147,10 @@ public:
   void buildRobot()
   {
     _builder->createNewRobot();
-    _builder->setChassis();
-    _builder->setController();
-    _builder->setPowerSupply();
-    _builder->setSoftware();
+    _builder->buildChassis();
+    _builder->buildController();
+    _builder->buildPowerSupply();
+    _builder->buildSoftware();
   }
 
   Robot* getResult() const
