@@ -6,7 +6,10 @@ using namespace std;
 class Robot
 {
 public:
-  Robot() {}
+  Robot(string name)
+  {
+    _name = name;
+  }
 
   void setChassis(string chassis)
   {
@@ -29,6 +32,7 @@ public:
   }
 
 private:
+  string _name;
   string _chassis;
   string _controller;
   string _powerSupply;
@@ -64,7 +68,7 @@ class CrawlerRobotBuilder : public RobotBuilder
 public:
   virtual void createNewRobot() override
   {
-    _robot = new Robot();
+    _robot = new Robot("Crawler Robot - Dagu DG012-SV"s);
   }
 
   virtual void setChassis() override
@@ -95,7 +99,7 @@ class WheeledRobotBuilder : public RobotBuilder
 public:
   virtual void createNewRobot() override
   {
-    _robot = new Robot();
+    _robot = new Robot("Wheeled Robot - Dagu Wild Thumper"s);
   }
 
   virtual void setChassis() override
