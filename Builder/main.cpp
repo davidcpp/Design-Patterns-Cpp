@@ -45,8 +45,8 @@ public:
 
   ~RobotBuilder()
   {
-    _robot = nullptr;
     delete _robot;
+    _robot = nullptr;
   }
 
   virtual void setChassis() = 0;
