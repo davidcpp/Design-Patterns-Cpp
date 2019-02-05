@@ -31,6 +31,17 @@ public:
     _software = software;
   }
 
+  friend ostream& operator<<(ostream& os, Robot& robot)
+  {
+    os << robot._name << endl << endl
+      << "Specification: " << endl
+      << "Chassis: " << robot._chassis << endl
+      << "Controller: " << robot._controller << endl
+      << "PowerSupply: " << robot._powerSupply << endl
+      << "Software: " << robot._software << endl << endl;
+    return os;
+  }
+
 private:
   string _name;
   string _chassis;
@@ -159,11 +170,13 @@ int main()
   director.setBuilder(&builder1);
   director.buildRobot();
   Robot desirableRobot1 = *director.getResult();
+  cout << desirableRobot1;
 
   WheeledRobotBuilder builder2;
   director.setBuilder(&builder2);
   director.buildRobot();
   Robot desirableRobot2 = *director.getResult();
+  cout << desirableRobot2;
 
   system("PAUSE");
   return 0;
