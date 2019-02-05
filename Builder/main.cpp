@@ -38,17 +38,13 @@ private:
 class RobotBuilder
 {
 public:
-  RobotBuilder()
-  {
-    _robot = new Robot();
-  }
-
   ~RobotBuilder()
   {
     delete _robot;
     _robot = nullptr;
   }
 
+  virtual void createNewRobot() = 0;
   virtual void setChassis() = 0;
   virtual void setController() = 0;
   virtual void setPowerSupply() = 0;
@@ -66,6 +62,11 @@ protected:
 class CrawlerRobotBuilder : public RobotBuilder
 {
 public:
+  virtual void createNewRobot() override
+  {
+    _robot = new Robot();
+  }
+
   virtual void setChassis() override
   {
     _robot->setChassis("Dagu DG012-SV"s);
@@ -92,6 +93,11 @@ private:
 class WheeledRobotBuilder : public RobotBuilder
 {
 public:
+  virtual void createNewRobot() override
+  {
+    _robot = new Robot();
+  }
+
   virtual void setChassis() override
   {
     _robot->setChassis("Dagu Wild Thumper"s);
@@ -125,6 +131,7 @@ public:
 
   void buildRobot()
   {
+    _builder->createNewRobot();
     _builder->setChassis();
     _builder->setController();
     _builder->setPowerSupply();
