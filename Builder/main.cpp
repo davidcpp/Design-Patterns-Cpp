@@ -6,9 +6,10 @@ using namespace std;
 class Robot
 {
 public:
-  Robot(string name)
+  Robot(string name, int id)
   {
     _name = name;
+    _id = id;
   }
 
   void setChassis(string chassis)
@@ -33,7 +34,7 @@ public:
 
   friend ostream& operator<<(ostream& os, Robot& robot)
   {
-    os << robot._name << endl << endl
+    os << robot._name << " no. " << robot._id << endl << endl
       << "Specification: " << endl
       << "Chassis: " << robot._chassis << endl
       << "Controller: " << robot._controller << endl
@@ -48,6 +49,7 @@ private:
   string _controller;
   string _powerSupply;
   string _software;
+  int _id;
 };
 
 class RobotBuilder
@@ -79,7 +81,7 @@ class CrawlerRobotBuilder : public RobotBuilder
 public:
   virtual void createNewRobot() override
   {
-    _robot = new Robot("Crawler Robot - Dagu DG012-SV"s);
+    _robot = new Robot("Crawler Robot - Dagu DG012-SV"s, ++robotCounter);
   }
 
   virtual void buildChassis() override
@@ -103,6 +105,7 @@ public:
   }
 
 private:
+  static int robotCounter;
 };
 
 class WheeledRobotBuilder : public RobotBuilder
@@ -110,7 +113,7 @@ class WheeledRobotBuilder : public RobotBuilder
 public:
   virtual void createNewRobot() override
   {
-    _robot = new Robot("Wheeled Robot - Dagu Wild Thumper"s);
+    _robot = new Robot("Wheeled Robot - Dagu Wild Thumper"s, ++robotCounter);
   }
 
   virtual void buildChassis() override
@@ -134,6 +137,7 @@ public:
   }
 
 private:
+  static int robotCounter;
 };
 
 class Director
@@ -161,6 +165,9 @@ public:
 private:
   RobotBuilder * _builder;
 };
+
+int CrawlerRobotBuilder::robotCounter = 0;
+int WheeledRobotBuilder::robotCounter = 0;
 
 int main()
 {
