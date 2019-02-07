@@ -167,21 +167,21 @@ int main()
 {
   Director director;
 
-  CrawlerRobotBuilder builder1;
-  director.setBuilder(&builder1);
+  CrawlerRobotBuilder crawlerBuilder;
+  director.setBuilder(&crawlerBuilder);
   director.buildRobot();
-  Robot desirableRobot1 = *director.getResult();
-  cout << desirableRobot1;
+  Robot crawlerRobot = *director.getResult();
+  cout << crawlerRobot;
   // show option of creating next Robot object by the same builder
   director.buildRobot();
   Robot nextCrawlerRobot = *director.getResult();
   cout << nextCrawlerRobot;
 
-  WheeledRobotBuilder builder2;
-  director.setBuilder(&builder2);
+  WheeledRobotBuilder wheeledBuilder;
+  director.setBuilder(&wheeledBuilder);
   director.buildRobot();
-  Robot desirableRobot2 = *director.getResult();
-  cout << desirableRobot2;
+  Robot wheeledRobot = *director.getResult();
+  cout << wheeledRobot;
   // show option of creating next Robot object by the same builder
   director.buildRobot();
   Robot nextWheeledRobot = *director.getResult();
