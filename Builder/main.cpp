@@ -172,12 +172,20 @@ int main()
   director.buildRobot();
   Robot desirableRobot1 = *director.getResult();
   cout << desirableRobot1;
+  // show option of creating next Robot object by the same builder
+  director.buildRobot();
+  Robot nextCrawlerRobot = *director.getResult();
+  cout << nextCrawlerRobot;
 
   WheeledRobotBuilder builder2;
   director.setBuilder(&builder2);
   director.buildRobot();
   Robot desirableRobot2 = *director.getResult();
   cout << desirableRobot2;
+  // show option of creating next Robot object by the same builder
+  director.buildRobot();
+  Robot nextWheeledRobot = *director.getResult();
+  cout << nextWheeledRobot;
 
   system("PAUSE");
   return 0;
