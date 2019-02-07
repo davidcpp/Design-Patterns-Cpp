@@ -1,6 +1,4 @@
 #include<iostream>
-#include<string>
-#include<memory>
 #include "Director.hpp"
 #include "Robot.hpp"
 #include "RobotBuilders.hpp"
