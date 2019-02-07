@@ -1,5 +1,6 @@
 #include<iostream>
 #include<string>
+#include<memory>
 
 using namespace std;
 
@@ -73,6 +74,13 @@ protected:
 class CrawlerRobotBuilder : public RobotBuilder
 {
 public:
+  static CrawlerRobotBuilder* instance()
+  {
+    if (crawlerRobotBuilder.get() == nullptr)
+      crawlerRobotBuilder = make_unique<CrawlerRobotBuilder>();
+    return crawlerRobotBuilder.get();
+  }
+
   virtual void createNewRobot() override
   {
     _robot = make_unique<Robot>("Crawler Robot - Dagu DG012-SV"s, ++robotCounter);
@@ -98,13 +106,25 @@ public:
     _robot->setSoftware("Raspbian"s);
   }
 
+  friend unique_ptr<CrawlerRobotBuilder> std::make_unique<CrawlerRobotBuilder>();
+
 private:
+  CrawlerRobotBuilder() {}
+
+  static unique_ptr<CrawlerRobotBuilder> crawlerRobotBuilder;
   static int robotCounter;
 };
 
 class WheeledRobotBuilder : public RobotBuilder
 {
 public:
+  static WheeledRobotBuilder* instance()
+  {
+    if (wheeledRobotBuilder.get() == nullptr)
+      wheeledRobotBuilder = make_unique<WheeledRobotBuilder>();
+    return wheeledRobotBuilder.get();
+  }
+
   virtual void createNewRobot() override
   {
     _robot = make_unique<Robot>("Wheeled Robot - Dagu Wild Thumper"s, ++robotCounter);
@@ -130,7 +150,12 @@ public:
     _robot->setSoftware("Free RTOS"s);
   }
 
+  friend unique_ptr<WheeledRobotBuilder> std::make_unique<WheeledRobotBuilder>();
+
 private:
+  WheeledRobotBuilder() {}
+
+  static unique_ptr<WheeledRobotBuilder> wheeledRobotBuilder;
   static int robotCounter;
 };
 
@@ -160,6 +185,8 @@ private:
   RobotBuilder * _builder;
 };
 
+unique_ptr<CrawlerRobotBuilder> CrawlerRobotBuilder::crawlerRobotBuilder;
+unique_ptr<WheeledRobotBuilder> WheeledRobotBuilder::wheeledRobotBuilder;
 int CrawlerRobotBuilder::robotCounter = 0;
 int WheeledRobotBuilder::robotCounter = 0;
 
@@ -167,8 +194,7 @@ int main()
 {
   Director director;
 
-  CrawlerRobotBuilder crawlerBuilder;
-  director.setBuilder(&crawlerBuilder);
+  director.setBuilder(CrawlerRobotBuilder::instance());
   director.buildRobot();
   Robot crawlerRobot = *director.getResult();
   cout << crawlerRobot;
@@ -177,8 +203,7 @@ int main()
   Robot nextCrawlerRobot = *director.getResult();
   cout << nextCrawlerRobot;
 
-  WheeledRobotBuilder wheeledBuilder;
-  director.setBuilder(&wheeledBuilder);
+  director.setBuilder(WheeledRobotBuilder::instance());
   director.buildRobot();
   Robot wheeledRobot = *director.getResult();
   cout << wheeledRobot;
