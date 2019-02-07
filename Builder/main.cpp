@@ -55,25 +55,19 @@ private:
 class RobotBuilder
 {
 public:
-  ~RobotBuilder()
-  {
-    delete _robot;
-    _robot = nullptr;
-  }
-
   virtual void createNewRobot() = 0;
   virtual void buildChassis() = 0;
   virtual void buildController() = 0;
   virtual void buildPowerSupply() = 0;
   virtual void buildSoftware() = 0;
 
-  Robot * getResult() const
+  unique_ptr<Robot> getResult()
   {
-    return _robot;
+    return std::move(_robot);
   }
 
 protected:
-  Robot * _robot;
+  unique_ptr<Robot> _robot;
 };
 
 class CrawlerRobotBuilder : public RobotBuilder
@@ -81,7 +75,7 @@ class CrawlerRobotBuilder : public RobotBuilder
 public:
   virtual void createNewRobot() override
   {
-    _robot = new Robot("Crawler Robot - Dagu DG012-SV"s, ++robotCounter);
+    _robot = make_unique<Robot>("Crawler Robot - Dagu DG012-SV"s, ++robotCounter);
   }
 
   virtual void buildChassis() override
@@ -113,7 +107,7 @@ class WheeledRobotBuilder : public RobotBuilder
 public:
   virtual void createNewRobot() override
   {
-    _robot = new Robot("Wheeled Robot - Dagu Wild Thumper"s, ++robotCounter);
+    _robot = make_unique<Robot>("Wheeled Robot - Dagu Wild Thumper"s, ++robotCounter);
   }
 
   virtual void buildChassis() override
@@ -157,7 +151,7 @@ public:
     _builder->buildSoftware();
   }
 
-  Robot* getResult() const
+  unique_ptr<Robot> getResult() const
   {
     return _builder->getResult();
   }
