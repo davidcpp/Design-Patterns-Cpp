@@ -29,7 +29,9 @@ public:
   {
     instanceMutex.lock();
     if (crawlerRobotBuilder.get() == nullptr)
+    {
       crawlerRobotBuilder = make_unique<CrawlerRobotBuilder>();
+    }
     instanceMutex.unlock();
 
     return crawlerRobotBuilder.get();
@@ -77,7 +79,9 @@ public:
   {
     instanceMutex.lock();
     if (wheeledRobotBuilder.get() == nullptr)
+    {
       wheeledRobotBuilder = make_unique<WheeledRobotBuilder>();
+    }
     instanceMutex.unlock();
 
     return wheeledRobotBuilder.get();
