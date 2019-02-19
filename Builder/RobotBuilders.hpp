@@ -1,4 +1,5 @@
 #pragma once
+#include <mutex>
 #include "Robot.hpp"
 
 using namespace std;
@@ -26,8 +27,11 @@ class CrawlerRobotBuilder : public RobotBuilder
 public:
   static CrawlerRobotBuilder* instance()
   {
+    instanceMutex.lock();
     if (crawlerRobotBuilder.get() == nullptr)
       crawlerRobotBuilder = make_unique<CrawlerRobotBuilder>();
+    instanceMutex.unlock();
+
     return crawlerRobotBuilder.get();
   }
 
@@ -61,6 +65,7 @@ public:
 private:
   CrawlerRobotBuilder() {}
 
+  static std::mutex instanceMutex;
   static unique_ptr<CrawlerRobotBuilder> crawlerRobotBuilder;
   static int robotCounter;
 };
@@ -70,8 +75,11 @@ class WheeledRobotBuilder : public RobotBuilder
 public:
   static WheeledRobotBuilder* instance()
   {
+    instanceMutex.lock();
     if (wheeledRobotBuilder.get() == nullptr)
       wheeledRobotBuilder = make_unique<WheeledRobotBuilder>();
+    instanceMutex.unlock();
+
     return wheeledRobotBuilder.get();
   }
 
@@ -105,6 +113,7 @@ public:
 private:
   WheeledRobotBuilder() {}
 
+  static std::mutex instanceMutex;
   static unique_ptr<WheeledRobotBuilder> wheeledRobotBuilder;
   static int robotCounter;
 };

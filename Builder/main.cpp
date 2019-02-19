@@ -5,6 +5,8 @@
 
 using namespace std;
 
+std::mutex CrawlerRobotBuilder::instanceMutex;
+std::mutex WheeledRobotBuilder::instanceMutex;
 unique_ptr<CrawlerRobotBuilder> CrawlerRobotBuilder::crawlerRobotBuilder;
 unique_ptr<WheeledRobotBuilder> WheeledRobotBuilder::wheeledRobotBuilder;
 int CrawlerRobotBuilder::robotCounter = 0;
