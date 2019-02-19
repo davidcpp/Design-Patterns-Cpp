@@ -18,7 +18,6 @@ unique_ptr<Coffee> CoffeeManufacturer::createCoffee(Coffee::TypeOfCoffee typeOfC
     return make_unique<BeansCoffee>();
     break;
   }
-  return nullptr;
 }
 
 unique_ptr<Coffee> LavazzaManufacturer::createCoffee(Coffee::TypeOfCoffee typeOfCoffee)
